@@ -8,6 +8,7 @@ const Loading = () => {
     <ClipLoader
         color='blue'
         size={150}
+        aria-label='Loading spinner'
     />
   )
 }
