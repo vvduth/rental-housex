@@ -1,7 +1,8 @@
 import React from 'react'
 import '@/assets/styles/globals.css'
 import { Metadata } from 'next';
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar';
+import Footer from '@/components/Footer';
 const metadata:Metadata = {
   title: 'Property Rental',
   keywords: 'Rental, properties and real estates ',
@@ -13,10 +14,12 @@ const MainLayout = ({children}:  Readonly<{
   return (
     <html>
         <body>
+        <Navbar />
             <main>
-              <Navbar />
+            
                 {children}
             </main>
+            <Footer />
         </body>
     </html>
   )
