@@ -52,7 +52,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             <span className="md:hidden lg:inline">Baths</span>
           </p>
           <p>
-            <FaRulerCombined />
+            <FaRulerCombined className="md:hidden lg:inline"/>
             {property.square_meter}{" "}
             <span className="md:hidden lg:inline">m2</span>
           </p>
@@ -78,7 +78,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             </span>
           </div>
           <Link
-            href="property.html"
+            href={`/properties/${property._id}`}
             className="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
           >
             Details

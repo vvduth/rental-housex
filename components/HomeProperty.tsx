@@ -7,8 +7,10 @@ import { PropertyInterface } from "@/types";
 import { Document } from "mongoose";
 const HomeProperty = async () => {
   await connectDB();
- const properties = await Property.find({}).lean() as unknown as (PropertyInterface & Document)[]
-  const recentProperties  = properties.slice(0, 3);
+  const properties = (await Property.find({})
+    .sort({ createdAt: -1 })
+    .limit(3)) as unknown as (PropertyInterface & Document)[];
+  const recentProperties = properties.slice(0, 3);
   return (
     <>
       <section className="px-4 py-6">
