@@ -1,4 +1,6 @@
-export interface PropertyInterface {
+import mongoose from "mongoose";
+
+export interface PropertyInterface extends mongoose.Document {
     _id: string;
     owner: string;
     name: string;

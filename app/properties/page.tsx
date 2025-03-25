@@ -1,7 +1,14 @@
 import React from "react";
-import properties from "@/properties.json";
 import PropertyCard from "@/components/PropertyCard";
-const PropertiesPage = () => {
+import connectDB from "@/config/db";
+import {Property} from '@/models/Property'
+import { PropertyInterface } from "@/types";
+import { Document } from 'mongoose';
+const PropertiesPage = async () => {
+
+  await connectDB()
+  const properties = await Property.find({}).lean() as unknown as (PropertyInterface & Document)[]
+ 
   return (
     <section className="px-4 py-6">
       <div className="container-xl lg:container m-auto px-4 py-6">
