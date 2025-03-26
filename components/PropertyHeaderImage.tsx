@@ -12,6 +12,7 @@ const PropertyHeaderImage = ({image}: {image: string}) => {
             className="object-cover h-[400px] w-full"
             width="1800"
             height={500}
+            priority={true}
           />
         </div>
       </div>
