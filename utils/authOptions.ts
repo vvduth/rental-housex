@@ -1,7 +1,15 @@
 import connectDB from "@/config/db";
 import { User } from "@/models/User";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, Session, User as NextAuthUser, DefaultSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { JWT } from "next-auth/jwt";
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+    } & DefaultSession["user"];
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET!,
@@ -9,7 +17,7 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      
+
       authorization: {
         params: {
           prompt: "consent",
@@ -44,17 +52,16 @@ export const authOptions: NextAuthOptions = {
       // 4. return true to allow sign in
       return true;
     },
-    // Session callback function that modifies the session object
-    async session({ session }) {
+   
+
+     // Modifies the session object
+     async session({ session }) {
       // 1. Get user from database
-      const user = await User.findOne({ email: session?.user?.email });
-      // 2. Assign user id from database to session
-      if (session.user) {
-        (session.user as { id: string }).id = user._id.toString();
-      }
+      const user = await User.findOne({ email: session.user.email });
+      // 2. Assign the user id to the session
+      session.user.id = user._id.toString();
       // 3. return session
       return session;
-  
     },
   },
 };

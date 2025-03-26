@@ -1,8 +1,9 @@
+'use client'
 import React from 'react'
-
+import addProperty from '@/app/actions/addProperty'
 const PropertyAddForm = () => {
   return (
-    <form>
+    <form action={addProperty}>
             <h2 className="text-3xl text-center font-semibold mb-6">
               Add Property
             </h2>
@@ -89,6 +90,13 @@ const PropertyAddForm = () => {
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="Zipcode"
               />
+              <input
+                type="text"
+                id="country"
+                name="location.country"
+                className="border rounded w-full py-2 px-3 mb-2"
+                placeholder="Country"
+              />
             </div>
 
             <div className="mb-4 flex flex-wrap">
@@ -124,15 +132,15 @@ const PropertyAddForm = () => {
               </div>
               <div className="w-full sm:w-1/3 pl-2">
                 <label
-                  htmlFor="square_feet"
+                  htmlFor="square_meter"
                   className="block text-gray-700 font-bold mb-2"
                 >
-                  Square Feet
+                  Area (in m<sup>2</sup>)
                 </label>
                 <input
                   type="number"
-                  id="square_feet"
-                  name="square_feet"
+                  id="square_meter"
+                  name="square_meter"
                   className="border rounded w-full py-2 px-3"
                   required
                 />
