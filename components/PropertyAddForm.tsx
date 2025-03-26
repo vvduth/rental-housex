@@ -1,9 +1,15 @@
 'use client'
 import React from 'react'
 import addProperty from '@/app/actions/addProperty'
+import { redirect } from 'next/navigation'
 const PropertyAddForm = () => {
+
+  const onFormSubmitHandler = async (data:FormData) => {
+    await addProperty(data)
+    redirect('/')
+  }
   return (
-    <form action={addProperty}>
+    <form action={onFormSubmitHandler}>
             <h2 className="text-3xl text-center font-semibold mb-6">
               Add Property
             </h2>
