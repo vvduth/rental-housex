@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
+import { ToastContainer } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 const metadata: Metadata = {
   title: "Property Rental",
   keywords: "Rental, properties and real estates ",
@@ -20,6 +22,7 @@ const MainLayout = ({
         <body>
           <Navbar />
           <main>{children}</main>
+          <ToastContainer />
           <Footer />
         </body>
       </html>

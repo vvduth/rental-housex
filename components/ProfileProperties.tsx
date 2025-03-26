@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PropertyInterface } from "@/types";
 import React from "react";
 import deleteProperty from "@/app/actions/deleteProperty";
+import {toast} from 'react-toastify'
 const ProfileProperties = ({
   properties: initialProperties,
 }: {
@@ -22,6 +23,9 @@ const ProfileProperties = ({
       const deletePropertyById = deleteProperty.bind(null, propertyId);
   
       await deletePropertyById();
+      
+
+      toast.success('Property Deleted');
   
       const updatedProperties = properties.filter(
         (property) => property._id !== propertyId
