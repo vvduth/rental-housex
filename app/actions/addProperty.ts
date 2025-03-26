@@ -3,6 +3,7 @@
 import connectDB from "@/config/db";
 import { getSessionUser } from "@/utils/getUserSession";
 import { Property } from "@/models/Property";
+import cloudinary from "@/config/cloudinary";
 
 async function addProperty(formData: FormData) {
   await connectDB();
@@ -18,11 +19,24 @@ async function addProperty(formData: FormData) {
   const amenities = formData.getAll("amenities");
   const images = formData
     .getAll("images")
-    .filter(
-      (image): image is File => image instanceof File && image.name !== ""
-    ) // Filter out empty names
-    .map((image) => image.name); // Extract only the names
+    .filter((image) => (image as File).name !== "") as File[];
 
+  const imageUrls = [];
+
+  for (const imageFile of images) {
+    const imageBuffer = await imageFile.arrayBuffer();
+    const imageArray = Array.from(new Uint8Array(imageBuffer))
+    const imageData = Buffer.from(imageArray)
+
+    const imagebase64 = imageData.toString('base64')
+
+    const result = await cloudinary.uploader.upload(`data:image/png;base64,${imagebase64}`,
+      {
+        folder: 'rental-housex'
+      }
+    )
+    imageUrls.push(result.secure_url)
+  }
   // Create the propertyData object with embedded seller_info
   const propertyData = {
     type: formData.get("type"),
@@ -33,12 +47,12 @@ async function addProperty(formData: FormData) {
       city: formData.get("location.city"),
       state: formData.get("location.state"),
       zipcode: formData.get("location.zipcode"),
-      country: formData.get('location.country')
+      country: formData.get("location.country"),
     },
     beds: formData.get("beds"),
     baths: formData.get("baths"),
 
-    square_meter: formData.get("quare_meter"),
+    square_meter: formData.get("square_meter"),
     amenities,
     rates: {
       weekly: formData.get("rates.weekly"),
@@ -50,7 +64,7 @@ async function addProperty(formData: FormData) {
       email: formData.get("seller_info.email"),
       phone: formData.get("seller_info.phone"),
     },
-    images,
+    images: imageUrls,
     owner: userId,
   };
 

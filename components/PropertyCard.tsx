@@ -24,10 +24,20 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         return `€${rates.nightly.toLocaleString()}/night`
     } 
   };
+  const imgSrcDisplay = () => {
+    const {images} = property
+    if (images[0].startsWith('http')) {
+      return property.images[0]
+    } else {
+      return `/images/properties/${property.images[0]}`
+    }
+  }
   return (
     <div className="rounded-xl shadow-md relative">
       <Image
-        src={`/images/properties/${property.images[0]}`}
+        //src={property.images[0] || `/images/properties/${property.images[0]}`}
+        src={imgSrcDisplay()}
+
         alt=""
         className="w-full h-auto rounded-t-xl"
         width={500}

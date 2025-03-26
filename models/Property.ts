@@ -21,7 +21,7 @@ const PropertySchema = new Schema({
         country: String,
         state: String, 
     },
-    bed: {
+    beds: {
         type: Number,
         required: true
     },
