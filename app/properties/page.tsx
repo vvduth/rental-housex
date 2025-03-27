@@ -8,6 +8,7 @@ const PropertiesPage = async () => {
 
   await connectDB()
   const properties = await Property.find({}).lean() as unknown as (PropertyInterface & Document)[]
+  
  
   return (
     <section className="px-4 py-6">

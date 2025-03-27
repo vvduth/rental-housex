@@ -5,8 +5,6 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import PropertyMap from "./PropertyMap";
 import { convertToSerializeableObject } from "@/utils/covertToObject";
 const PropertyDetails = ({ property }: { property: PropertyInterface }) => {
-
-  
   return (
     <main>
       <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
@@ -61,39 +59,37 @@ const PropertyDetails = ({ property }: { property: PropertyInterface }) => {
         <h3 className="text-lg font-bold mb-6">Description & Details</h3>
         <div className="flex justify-center gap-4 text-blue-500 mb-4 text-xl space-x-9">
           <p>
-            <i className="fa-solid fa-bed"></i> {property.beds} {' '}
+            <i className="fa-solid fa-bed"></i> {property.beds}{" "}
             <span className="hidden sm:inline">Beds</span>
           </p>
           <p>
-            <i className="fa-solid fa-bath"></i> {property.baths} {' '}
+            <i className="fa-solid fa-bath"></i> {property.baths}{" "}
             <span className="hidden sm:inline">Baths</span>
           </p>
           <p>
             <i className="fa-solid fa-ruler-combined"></i>
-            {property.square_meter}{' '} <span className="hidden sm:inline">m<sup>2</sup></span>
+            {property.square_meter}{" "}
+            <span className="hidden sm:inline">
+              m<sup>2</sup>
+            </span>
           </p>
         </div>
-        <p className="text-gray-500 mb-4">
-          {property.description}
-        </p>
+        <p className="text-gray-500 mb-4">{property.description}</p>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
         <h3 className="text-lg font-bold mb-6">Amenities</h3>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 list-none">
-         {property.amenities.map((amenity, index) => (
-          <li
-            key={index}
-          >
-            <FaCheck className="inline-block text-green-600 mr-2" /> {amenity}
-          </li>
-         ))}
+          {property.amenities.map((amenity, index) => (
+            <li key={index}>
+              <FaCheck className="inline-block text-green-600 mr-2" /> {amenity}
+            </li>
+          ))}
         </ul>
       </div>
       {/* <!-- Map --> */}
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-        <div id="map">map ara</div>
         <PropertyMap property={convertToSerializeableObject(property)} />
       </div>
     </main>

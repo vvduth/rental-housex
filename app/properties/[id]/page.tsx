@@ -7,6 +7,10 @@ import PropertyDetails from "@/components/PropertyDetails";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import PropertyImages from "@/components/PropertyImages";
+import BookmarkButton from "@/components/BookmarkButton";
+import ShareButton from "@/components/ShareButton";
+import ContactForm from "@/components/ContactForm";
+import { convertToSerializeableObject } from "@/utils/covertToObject";
 const PropertyPage = async ({
   params,
 }: {
@@ -16,11 +20,16 @@ const PropertyPage = async ({
 }) => {
   await connectDB();
   const {id} = await params
-  const property = (await Property.findById(
+  const propertyDoc = (await Property.findById(
     id
   ).lean()) as unknown as PropertyInterface;
+  const property = convertToSerializeableObject(propertyDoc) as PropertyInterface;
   if (property === null) {
-    return <>Not found</>;
+    return (
+      <h1 className='text-center text-2xl font-bold mt-10'>
+        Property Not Found
+      </h1>
+    );
   }
   return (
     <>
@@ -42,6 +51,12 @@ const PropertyPage = async ({
           <PropertyDetails 
             property= {property}
           />
+          {/* sidebar */}
+          <aside className="space-y-4">
+            <BookmarkButton property={property} />
+            <ShareButton property={property}/>
+            <ContactForm property={property}/>
+          </aside>
           </div>
         </div>
       </section>

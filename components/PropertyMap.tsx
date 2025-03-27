@@ -6,6 +6,7 @@ import { setDefaults, fromAddress, OutputFormat } from "react-geocode";
 import Image from "next/image";
 import pin from "@/assets/images/pin.svg";
 import { PropertyInterface } from "@/types";
+import Spinner from "./Spinner";
 const PropertyMap = ({ property }: { property: PropertyInterface | any }) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lng, setLng] = useState<number | null>(null);
@@ -64,7 +65,7 @@ const PropertyMap = ({ property }: { property: PropertyInterface | any }) => {
     fetchCoords();
   }, []);
 
-  if (loading) return <h3>Loading...</h3>;
+  if (loading) return (<Spinner loading={loading} />);
 
   if (geocodeError) {
     return <div className="text-xl">No location data found</div>;
