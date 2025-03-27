@@ -79,7 +79,7 @@ const Navbar = () => {
                 />
 
                 <span className="hidden md:block text-white text-2xl font-bold ml-2">
-                  PropertyPulse
+                  RentalhouseX
                 </span>
               </Link>
               {/* <!-- Desktop Menu Hidden below md screens --> */}
@@ -205,7 +205,7 @@ const Navbar = () => {
                         Your Profile
                       </Link>
                       <Link
-                        href="/saved-properties"
+                        href='/properties/saved'
                         className="block px-4 py-2 text-sm text-gray-700"
                         role="menuitem"
                           tabIndex={-1}
