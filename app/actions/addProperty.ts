@@ -68,7 +68,13 @@ async function addProperty(formData: FormData) {
     owner: userId,
   };
 
+  // Debug the propertyData object
+  console.log("Property data before saving:", propertyData);
+
   const newProperty = new Property(propertyData);
+
+  console.log(newProperty)
+  
   await newProperty.save();
 }
 

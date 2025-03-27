@@ -15,12 +15,22 @@ const PropertySchema = new Schema({
         type: String
     },
     location: {
-        street: String,
-        city: String,
-        zipCode: String,
-        country: String,
-        state: String, 
-    },
+        street: {
+          type: String,
+        },
+        city: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        zipcode: {
+          type: String,
+        },
+        country: {
+            type: String
+        }
+      },
     beds: {
         type: Number,
         required: true
@@ -40,7 +50,7 @@ const PropertySchema = new Schema({
     ],
     rates: {
         nightly: Number, 
-        weeklyNumber: Number,
+        weekly: Number,
         monthly:Number
     },
     seller_info: {

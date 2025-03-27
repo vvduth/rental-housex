@@ -13,8 +13,8 @@ const EditPropertiesPage = async ({
 }) => {
   await connectDB();
   const { id } = await params;
-  const propertyToEdit = await Property.findById(id);
-  const property = convertToSerializeableObject(propertyToEdit) as PropertyInterface
+  const propertyToEdit = await Property.findById(id).lean();
+  const property = convertToSerializeableObject(propertyToEdit)  as PropertyInterface
   if (!property) {
     return (
       <h1 className='text-center text-2xl font-bold mt-10'>

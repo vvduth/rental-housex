@@ -9,7 +9,7 @@ interface LeanDocument {
   [key: string]: any;
 }
 
-export function convertToSerializeableObject(leanDocument: LeanDocument): Object {
+export function convertToSerializeableObject(leanDocument: LeanDocument|any): Object {
   for (const key of Object.keys(leanDocument)) {
     if (leanDocument[key].toJSON && leanDocument[key].toString) {
       leanDocument[key] = leanDocument[key].toString();

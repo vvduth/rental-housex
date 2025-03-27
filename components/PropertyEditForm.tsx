@@ -1,16 +1,15 @@
+'use client'
 import { PropertyInterface } from '@/types'
 import React from 'react'
-
+import { updateProperty } from '@/app/actions/updateProperty'
 const PropertyEditForm = ({property}: {property: PropertyInterface}) => {
     
  
-    const onSubmit = () => {
-
-    }
+  const updatePropertyById = updateProperty.bind(null, property._id);
 
     //action={onSubmit}
     return (
-      <form >
+      <form action={updatePropertyById}>
         <h2 className='text-3xl text-center font-semibold mb-6'>Edit Property</h2>
   
         <div className='mb-4'>
@@ -99,6 +98,14 @@ const PropertyEditForm = ({property}: {property: PropertyInterface}) => {
             className='border rounded w-full py-2 px-3 mb-2'
             placeholder='Zipcode'
             defaultValue={property.location.zipcode}
+          />
+          <input
+            type='text'
+            id='zipcode'
+            name='location.country'
+            className='border rounded w-full py-2 px-3 mb-2'
+            placeholder='Country'
+            defaultValue={property.location.country}
           />
         </div>
   
