@@ -2,7 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { PropertyInterface } from "@/types";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import PropertyMap from "./PropertyMap";
+import { convertToSerializeableObject } from "@/utils/covertToObject";
 const PropertyDetails = ({ property }: { property: PropertyInterface }) => {
+
+  
   return (
     <main>
       <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
@@ -89,7 +93,8 @@ const PropertyDetails = ({ property }: { property: PropertyInterface }) => {
       </div>
       {/* <!-- Map --> */}
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-        <div id="map"></div>
+        <div id="map">map ara</div>
+        <PropertyMap property={convertToSerializeableObject(property)} />
       </div>
     </main>
   );
