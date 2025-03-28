@@ -1,19 +1,34 @@
 'use client'
-import { MessageInterface, PropertyInterface } from '@/types'
+import { GlobalContextType, MessageInterface, PropertyInterface } from '@/types'
 import React, { useState } from 'react'
 import markMessageAsRead from '@/app/actions/markMessageAsRead'
 import {toast} from "react-toastify"
-
-
+import deleteMessage from '@/app/actions/deleteMessage'
+import { useGlobalContext } from '@/context/GlobalContext'
 const MessageCard = ({message}: {
     message: MessageInterface
 }) => {
 const [isRead, setIsRead] = useState(message.read)
+const [isdelete, setIsdelete] = useState(false)
 
+
+const {setUnreadCount} = useGlobalContext() as GlobalContextType
 const handleReadClick = async () =>{
   const read = await markMessageAsRead(message._id) as boolean;
   setIsRead(read)
+  setUnreadCount((prevCount) => (read ? prevCount -1 : prevCount +1))
   toast.success(`marked as ${read ? 'read': 'unread'} successfully`)
+}
+
+const handleDeleteClick = async () => {
+  await deleteMessage(message._id) 
+  setIsdelete(true)
+  setUnreadCount((prevCount) => (isRead ? prevCount -1 : prevCount +1))
+  toast.success('Delete successfully')
+}
+
+if (isdelete) {
+  return <p>Deleted Message</p>
 }
 
   return (
@@ -56,7 +71,9 @@ const handleReadClick = async () =>{
     className='mt-4 mr-3 bg-blue-500 text-white py-1 px-3 rounded-md'>
       {isRead ? 'Mark as new' : 'Mark as Read'}
     </button>
-    <button className='mt-4 bg-red-500 text-white py-1 px-3 rounded-md'>
+    <button
+    onClick={handleDeleteClick}
+    className='mt-4 bg-red-500 text-white py-1 px-3 rounded-md'>
       Delete
     </button>
   </div>

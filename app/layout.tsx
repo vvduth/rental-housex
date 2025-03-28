@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import { ToastContainer } from 'react-toastify';
+import { GlobalProvider } from "@/context/GlobalContext";
  import 'react-toastify/dist/ReactToastify.css';
 const metadata: Metadata = {
   title: "Property Rental",
@@ -18,6 +19,7 @@ const MainLayout = ({
 }>) => {
   return (
     <AuthProvider>
+      <GlobalProvider>
       <html>
         <body>
           <Navbar />
@@ -26,6 +28,8 @@ const MainLayout = ({
           <Footer />
         </body>
       </html>
+      </GlobalProvider>
+      
     </AuthProvider>
   );
 };

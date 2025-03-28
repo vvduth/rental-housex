@@ -55,3 +55,8 @@ export interface MessageInterface extends mongoose.Document {
   createdAt: string;
   updatedAt: string
 }
+
+export  interface GlobalContextType {
+  unreadCount: number;
+  setUnreadCount: React.Dispatch<React.SetStateAction<number>>;
+}
