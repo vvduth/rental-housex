@@ -34,6 +34,7 @@ export interface PropertyInterface extends mongoose.Document {
 }
 
 export interface UserInterface extends mongoose.Document {
+  _id: string,
   email: string;
   username: string;
   image: string;
@@ -42,13 +43,14 @@ export interface UserInterface extends mongoose.Document {
 
 
 export interface MessageInterface extends mongoose.Document {
-  sender: string, 
-  recipient: string, 
-  property: string, 
+  _id: string,
+  sender: string | Object, 
+  recipient: string | Object, 
+  property: string |Object, 
   name: string, 
   email: string, 
   phone: string ,
   body: string, 
   read: boolean, 
-  
+
 }

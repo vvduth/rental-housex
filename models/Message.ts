@@ -1,5 +1,5 @@
 import { MessageInterface } from '@/types';
-import { Schema, model, models } from 'mongoose';
+import { Model, Schema, model, models } from 'mongoose';
  
  const MessageSchema = new Schema(
    {
@@ -42,6 +42,8 @@ import { Schema, model, models } from 'mongoose';
    }
  );
  
- const Message = models.Message || model<MessageInterface>('Message', MessageSchema);
+ const Message = models.Message  as Model<MessageInterface> || model<MessageInterface>('Message', MessageSchema);
  
+ 
+
  export default Message;
