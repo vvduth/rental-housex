@@ -47,8 +47,7 @@ const MessagesPage = async () => {
                 <h1 className="text-3xl font-bold mb-4">
                     Your messages
                 </h1>
-            </div>
-            <div className="space-y-4">
+                <div className="space-y-4">
                 {messages.length === 0 ? (
                     <p>You have no messages</p>
                 )  : (
@@ -60,6 +59,8 @@ const MessagesPage = async () => {
                     ))
                 )}
             </div>
+            </div>
+            
         </div>
     </section>
   );
