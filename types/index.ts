@@ -44,13 +44,14 @@ export interface UserInterface extends mongoose.Document {
 
 export interface MessageInterface extends mongoose.Document {
   _id: string,
-  sender: string | Object, 
-  recipient: string | Object, 
-  property: string |Object, 
+  sender: string | Object |UserInterface, 
+  recipient: string | Object | UserInterface, 
+  property: string | Object | PropertyInterface, 
   name: string, 
   email: string, 
   phone: string ,
   body: string, 
   read: boolean, 
-
+  createdAt: string;
+  updatedAt: string
 }
