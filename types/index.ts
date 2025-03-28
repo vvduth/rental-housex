@@ -39,3 +39,16 @@ export interface UserInterface extends mongoose.Document {
   image: string;
   bookmarks: string[] | any
 }
+
+
+export interface MessageInterface extends mongoose.Document {
+  sender: string, 
+  recipient: string, 
+  property: string, 
+  name: string, 
+  email: string, 
+  phone: string ,
+  body: string, 
+  read: boolean, 
+  
+}
