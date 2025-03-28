@@ -2,15 +2,21 @@ import React from "react";
 import PropertyCard from "@/components/PropertyCard";
 import connectDB from "@/config/db";
 import { Property } from "@/models/Property";
-import { PropertyInterface } from "@/types";
-import { Document } from "mongoose";
+import Pagination from "@/components/Pagination";
 import PropertySearchForm from "@/components/PropertySearchForm";
-const PropertiesPage = async () => {
+const PropertiesPage = async ({
+  searchParams: { page = 1, pageSize = 2 },
+}: {
+  searchParams: {
+    page: number;
+    pageSize: number;
+  };
+}) => {
   await connectDB();
-  const properties = (await Property.find(
-    {}
-  ).lean()) as unknown as (PropertyInterface & Document)[];
-
+  const skip = (page-1) * pageSize ;
+  const total = await Property.countDocuments({}) as unknown as number
+  const properties = await Property.find({}).skip(skip).limit(pageSize);
+console.log(total)
   return (
     <>
       <section className="bg-blue-700 py-4">
@@ -29,6 +35,10 @@ const PropertiesPage = async () => {
               ))}
             </div>
           )}
+          <Pagination 
+          page={page}
+          pageSize={pageSize}
+          totalItems={total}/>
         </div>
       </section>
     </>

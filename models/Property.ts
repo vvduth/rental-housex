@@ -1,72 +1,77 @@
 import { PropertyInterface } from "@/types";
-import { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
-const PropertySchema = new Schema({
+const PropertySchema = new Schema(
+  {
     owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true 
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    name:  {
-        type: String, 
-        required: true
+    name: {
+      type: String,
+      required: true,
     },
     description: {
-        type: String
+      type: String,
     },
     location: {
-        street: {
-          type: String,
-        },
-        city: {
-          type: String,
-        },
-        state: {
-          type: String,
-        },
-        zipcode: {
-          type: String,
-        },
-        country: {
-            type: String
-        }
+      street: {
+        type: String,
       },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      zipcode: {
+        type: String,
+      },
+      country: {
+        type: String,
+      },
+    },
     beds: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     baths: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     square_meter: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     amenities: [
-        {
-            type: String
-        }
+      {
+        type: String,
+      },
     ],
     rates: {
-        nightly: Number, 
-        weekly: Number,
-        monthly:Number
+      nightly: Number,
+      weekly: Number,
+      monthly: Number,
     },
     seller_info: {
-        name: String,
-        email: String, 
-        phone: String
+      name: String,
+      email: String,
+      phone: String,
     },
     images: [
-        {
-            type: String
-        }
+      {
+        type: String,
+      },
     ],
     is_featured: {
-        type: Boolean,
-        default: false
-    }
-}, { timestamps: true });
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
 
-export const Property =  models.Property || model<PropertyInterface>("Property", PropertySchema);
+export const Property =
+  (models.Property as Model<PropertyInterface>) ||
+  model<PropertyInterface>("Property", PropertySchema);

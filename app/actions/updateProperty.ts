@@ -22,7 +22,7 @@ export async function updateProperty(propertyId: string, formData: FormData) {
   const existingProperty = await Property.findById(propertyId);
 
   // Verify ownership
-  if (existingProperty.owner.toString() !== userId) {
+  if (existingProperty?.owner.toString() !== userId) {
     throw new Error("Current user does not own this property.");
   }
 
@@ -55,7 +55,7 @@ export async function updateProperty(propertyId: string, formData: FormData) {
     owner: userId,
   };
 
-  console.log('zipcode: ', typeof(propertyData.location.zipcode))
+ 
   const updatedProperty = await Property.findByIdAndUpdate(
     propertyId,
     propertyData
@@ -63,7 +63,7 @@ export async function updateProperty(propertyId: string, formData: FormData) {
 
   revalidatePath("/", "layout");
 
-  redirect(`/properties/${updatedProperty._id}`);
+  redirect(`/properties/${updatedProperty?._id}`);
 }
 
 

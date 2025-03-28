@@ -25,17 +25,18 @@ async function addProperty(formData: FormData) {
 
   for (const imageFile of images) {
     const imageBuffer = await imageFile.arrayBuffer();
-    const imageArray = Array.from(new Uint8Array(imageBuffer))
-    const imageData = Buffer.from(imageArray)
+    const imageArray = Array.from(new Uint8Array(imageBuffer));
+    const imageData = Buffer.from(imageArray);
 
-    const imagebase64 = imageData.toString('base64')
+    const imagebase64 = imageData.toString("base64");
 
-    const result = await cloudinary.uploader.upload(`data:image/png;base64,${imagebase64}`,
+    const result = await cloudinary.uploader.upload(
+      `data:image/png;base64,${imagebase64}`,
       {
-        folder: 'rental-housex'
+        folder: "rental-housex",
       }
-    )
-    imageUrls.push(result.secure_url)
+    );
+    imageUrls.push(result.secure_url);
   }
   // Create the propertyData object with embedded seller_info
   const propertyData = {
@@ -68,13 +69,8 @@ async function addProperty(formData: FormData) {
     owner: userId,
   };
 
-  // Debug the propertyData object
-  console.log("Property data before saving:", propertyData);
-
   const newProperty = new Property(propertyData);
 
-  console.log(newProperty)
-  
   await newProperty.save();
 }
 
