@@ -8,7 +8,7 @@ const EditPropertiesPage = async ({
   params,
 }: {
   params: {
-    id: string;
+    id: Promise<any>;
   };
 }) => {
   await connectDB();
