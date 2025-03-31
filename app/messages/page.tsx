@@ -6,6 +6,7 @@ import { convertToSerializeableObject } from "@/utils/covertToObject";
 import Message from "@/models/Message";
 import { MessageInterface } from "@/types";
 import MessageCard from "@/components/MessageCard";
+export const dynamic = 'force-dynamic';
 const MessagesPage = async () => {
   await connectDB();
 
@@ -67,3 +68,4 @@ const MessagesPage = async () => {
 };
 
 export default MessagesPage;
+

@@ -36,5 +36,5 @@ const PropertiesSavedPage = async () => {
   </section>
   )
 }
-
+export const dynamic = 'force-dynamic';
 export default PropertiesSavedPage

@@ -11,15 +11,14 @@ import BookmarkButton from "@/components/BookmarkButton";
 import ShareButton from "@/components/ShareButton";
 import ContactForm from "@/components/ContactForm";
 import { convertToSerializeableObject } from "@/utils/covertToObject";
-const PropertyPage = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
+
+type Params = Promise<{ id: string }>;
+const PropertyPage =async (props: {
+  params: Params
 }) => {
   await connectDB();
-  const {id} = await params
+  const params = await props.params;
+  const id = params.id
   const propertyDoc = (await Property.findById(
     id
   ).lean()) as unknown as PropertyInterface;

@@ -4,15 +4,18 @@ import connectDB from "@/config/db";
 import { Property } from "@/models/Property";
 import Pagination from "@/components/Pagination";
 import PropertySearchForm from "@/components/PropertySearchForm";
-const PropertiesPage = async ({
-  searchParams: { page = 1, pageSize = 2 },
-}: {
-  searchParams: {
-    page: number;
-    pageSize: number;
-  };
+
+
+type SearchParams = Promise<{ page: 1, pageSize: 2}>
+
+
+const PropertiesPage = async (props: {
+  searchParams: SearchParams;
 }) => {
   await connectDB();
+  const searchParams = await props.searchParams;
+  const page = searchParams.page
+  const pageSize = searchParams.pageSize
   const skip = (page-1) * pageSize ;
   const total = await Property.countDocuments({}) as unknown as number
   const properties = await Property.find({}).skip(skip).limit(pageSize);

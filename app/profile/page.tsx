@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Property } from "@/models/Property";
 import ProfileProperties from "@/components/ProfileProperties";
 import { PropertyInterface } from "@/types";
+export const dynamic = 'force-dynamic';
 const ProfilePage = async () => {
   await connectDB();
 

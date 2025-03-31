@@ -7,12 +7,16 @@ import PropertyCard from "@/components/PropertyCard";
 import PropertySearchForm from "@/components/PropertySearchForm";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { PropertyInterface } from "@/types";
-const SearchResultPage = async ({
-  searchParams: { location, propertyType },
-}: {
-  searchParams: { location: string; propertyType: string };
+
+type SearchParams = Promise<{ location: string, propertyType: string}>
+
+const SearchResultPage = async (props: {
+  searchParams: SearchParams;
 }) => {
   await connectDB();
+  const searchParams = await  props.searchParams
+  const location = searchParams.location
+  const propertyType = searchParams.propertyType
   const locationReg = new RegExp(location, "i");
   // Match location pattern against database fields
   let query: {
