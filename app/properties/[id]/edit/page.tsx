@@ -4,15 +4,11 @@ import { Property } from "@/models/Property";
 import { convertToSerializeableObject } from "@/utils/covertToObject";
 import PropertyEditForm from "@/components/PropertyEditForm";
 import { PropertyInterface } from "@/types";
-const EditPropertiesPage = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
+
+type Params = Promise<{ id: string }>;
+const EditPropertiesPage = async (params: any) => {
   await connectDB();
-  const { id } =  params;
+  const { id } =  await params as any;
   const propertyToEdit = await Property.findById(id).lean();
   const property = convertToSerializeableObject(propertyToEdit)  as PropertyInterface
   if (!property) {
