@@ -8,11 +8,11 @@ const EditPropertiesPage = async ({
   params,
 }: {
   params: {
-    id: Promise<any>;
+    id: string;
   };
 }) => {
   await connectDB();
-  const { id } = await params;
+  const { id } =  params;
   const propertyToEdit = await Property.findById(id).lean();
   const property = convertToSerializeableObject(propertyToEdit)  as PropertyInterface
   if (!property) {
