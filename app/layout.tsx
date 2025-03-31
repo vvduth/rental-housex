@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from 'react-toastify';
 import { GlobalProvider } from "@/context/GlobalContext";
  import 'react-toastify/dist/ReactToastify.css';
+import 'photoswipe/dist/photoswipe.css'
+
 const metadata: Metadata = {
   title: "Property Rental",
   keywords: "Rental, properties and real estates ",
